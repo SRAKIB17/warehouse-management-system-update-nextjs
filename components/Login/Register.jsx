@@ -16,8 +16,8 @@ const Register = () => {
             <div className="w-[50%] hidden md:block">
                 <img src="/icon/svg/signup.svg" alt="" className="w-full" />
             </div>
-            <div className="w-full md:w-[50%] ">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-3 mx-auto max-w-sm p-4 md:max-w-md">
+            <div className=" md:w-[50%] flex w-full flex-col gap-3 mx-auto max-w-sm p-4 md:max-w-md">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-3 mx-auto max-w-sm md:max-w-md">
                     <h1 className="text-primary text-3xl text-center">New Account</h1>
                     <input
                         type='text'
@@ -46,18 +46,18 @@ const Register = () => {
                     <button className="btn btn-accent btn-sm sm:btn-md text-white rounded-3xl">
                         Login
                     </button>
-                    <button className="btn btn-info btn-sm sm:btn-md text-white rounded-3xl flex items-center gap-1">
-                        <img src="/icon/svg/google-login.svg" alt="" className="w-7 h-auto" />
-                        Login With Google
-                    </button>
-
-                    <button onClick={() => router.replace('/login')} className="text-left pt-1">
-                        Already Registered.
-                        <span className="link-primary link-hover">
-                            {" "}   Login
-                        </span>
-                    </button>
                 </form>
+                <button className="btn btn-info btn-sm sm:btn-md text-white rounded-3xl flex items-center gap-1">
+                    <img src="/icon/svg/google-login.svg" alt="" className="w-5 sm:w-7 h-auto" />
+                    Login With Google
+                </button>
+
+                <button onClick={() => router.replace('/login')} className="text-left pt-1">
+                    Already Registered.
+                    <span className="link-primary link-hover">
+                        {" "}   Login
+                    </span>
+                </button>
             </div>
         </div>
     );

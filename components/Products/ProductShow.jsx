@@ -22,7 +22,7 @@ const ProductShow = ({ props }) => {
                                 <img src={imageUrl} alt="Shoes" className='w-full rounded-md h-[300px] sm:h-64 ' />
                             </figure>
                             {/* *******CARD BODY ********* */}
-                            <div className='p-4 pt-6'>
+                            <div className='pl-6 pr-6 pb-4 pt-6 flex flex-col gap-1'>
                                 <h2 className="text-xl p-2 font-bold relative">
                                     <p>
                                         {title}
@@ -34,13 +34,32 @@ const ProductShow = ({ props }) => {
                                         </div>
                                     }
                                 </h2>
-                                <span className='text-xl text-gray-500 p-2'>
-                                    {supplierName}
+                                <span className='text-sm text-gray-500'>
+                                    Supplier:
+                                    <span className='text-primary'>
+                                        {" " + supplierName}
+                                    </span>
+                                </span>
+                                <span className='text-sm text-gray-500'>
+                                    Quantity:
+                                    {
+                                        !Boolean(eval(quantity)) ?
+
+                                            <span className='text-red-500'>
+                                                {" "}  Stock Out
+                                            </span>
+                                            :
+                                            <span className='text-primary'>
+                                                {" " + quantity}
+                                            </span>
+                                    }
+
                                 </span>
                                 <div>
                                     <Rating rating={rating} />
                                 </div>
-                                <div className='text-xl flex gap-3 font-bold'>
+                                <div className='text-xl flex gap-3 font-bold text-orange-500'>
+                                    Price:
                                     {
                                         DiscountPrice &&
                                         <span>
@@ -67,6 +86,10 @@ const ProductShow = ({ props }) => {
                     <div className='h-[60px]'></div>
                     <div className=' absolute bottom-0 flex justify-between gap-1 p-4 w-full'>
                         <div className='flex gap-1 items-center'>
+                            <button className='btn btn-info text-white btn-sm flex gap-1' onClick={() => router.replace('/products/inventory/' + _id)}>
+                                Manage Item
+                                <Arrow_next_arrows_right_move size='20' color='currentColor' />
+                            </button>
                             <button className='btn btn-info text-white btn-sm flex gap-1' onClick={() => router.replace('/products/' + _id)}>
                                 buy now  <Arrow_next_arrows_right_move size='20' color='currentColor' />
                             </button>
