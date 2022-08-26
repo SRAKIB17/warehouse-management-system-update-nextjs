@@ -1,10 +1,10 @@
 import React from 'react';
-import Products from '../../components/Products/Products';
+import Register from '../../components/Login/Register';
 
 const Index = () => {
     return (
         <div>
-            <Products/>
+            <Register/>
         </div>
     );
 };

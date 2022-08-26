@@ -1,10 +1,10 @@
 import React from 'react';
-import Products from '../../components/Products/Products';
+import Reset from '../../components/Login/Reset';
 
 const Index = () => {
     return (
         <div>
-            <Products/>
+            <Reset/>
         </div>
     );
 };

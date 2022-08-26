@@ -1,12 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
+import Arrow_next_arrows_right_move from '../LogoSvg/Arrow_next_arrows_right_move';
+import Cart from '../LogoSvg/Cart';
+import Love_favorite_fitness_heart_favourite_hearth_like_valentine from '../LogoSvg/Love_favorite_fitness_heart_favourite_hearth_like_valentine';
 import styles from './product.module.css'
+import { useRouter } from 'next/router';
+import Rating from './rating';
 
 const ProductShow = ({ props }) => {
-    const { DiscountPrice, category, details, imageUrl, supplierName, price, title, quantity, _id } = props;
-
-    console.log(props)
+    const { DiscountPrice, category, rating, details, imageUrl, supplierName, price, title, quantity, _id } = props;
     // const getTimeSince = timeSince(time);
+    const router = useRouter()
+
     return (
         <div>
             <div className={styles.productShadow + " card bg-base-100 servicesComponent h-full"}>
@@ -18,7 +23,7 @@ const ProductShow = ({ props }) => {
                             </figure>
                             {/* *******CARD BODY ********* */}
                             <div className='p-4 pt-6'>
-                                <h2 className="text-[18px] p-2 font-bold relative">
+                                <h2 className="text-xl p-2 font-bold relative">
                                     <p>
                                         {title}
                                     </p>
@@ -29,11 +34,11 @@ const ProductShow = ({ props }) => {
                                         </div>
                                     }
                                 </h2>
-                                <span className='text-sm text-gray-500'>
-                                    {/* Last Update: {getTimeSince} */}
+                                <span className='text-xl text-gray-500 p-2'>
+                                    {supplierName}
                                 </span>
                                 <div>
-                                    {/* <Rating rating={rating} /> */}
+                                    <Rating rating={rating} />
                                 </div>
                                 <div className='text-xl flex gap-3 font-bold'>
                                     {
@@ -61,11 +66,18 @@ const ProductShow = ({ props }) => {
                     </div>
                     <div className='h-[60px]'></div>
                     <div className=' absolute bottom-0 flex justify-between gap-1 p-4 w-full'>
+                        <div className='flex gap-1 items-center'>
+                            <button className='btn btn-info text-white btn-sm flex gap-1' onClick={() => router.replace('/products/' + _id)}>
+                                buy now  <Arrow_next_arrows_right_move size='20' color='currentColor' />
+                            </button>
+
+                            <button className='btn btn-info text-white btn-sm flex gap-1'>
+                                <Cart size='20' color='currentColor' /> Add to Cart
+                            </button>
+
+                        </div>
                         <button className='btn btn-info text-white btn-sm flex gap-1'>
-                            {/* <Cart size='20' color='currentColor' /> Add to Cart */}
-                        </button>
-                        <button className='btn btn-info text-white btn-sm flex gap-1'>
-                            {/* <Love_favorite_fitness_heart_favourite_hearth_like_valentine size='20' color='currentColor' /> */}
+                            <Love_favorite_fitness_heart_favourite_hearth_like_valentine size='20' color='currentColor' />
                         </button>
                     </div>
                 </div>

@@ -1,10 +1,10 @@
 import React from 'react';
-import Products from '../../components/Products/Products';
+import Login from '../../components/Login/Login';
 
 const Index = () => {
     return (
         <div>
-            <Products/>
+            <Login/>
         </div>
     );
 };
