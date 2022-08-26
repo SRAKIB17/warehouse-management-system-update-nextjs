@@ -16,12 +16,13 @@ const HomeProduct = () => {
 
     return (
         <div>
-            <div>
+            <div className='mt-9 border-b-4 w-fit mx-auto border-primary rounded-md'>
                 <h1 className='text-[25px] sm:text-3xl font-extrabold text-center'>
-                    Courses to get you started
+                    Most Popular
+
                 </h1>
                 <h6 className='text-lg font-bold text-center'>
-                    Course Complete and get professional certificate
+                    Trending Inventories
                 </h6>
             </div>
 

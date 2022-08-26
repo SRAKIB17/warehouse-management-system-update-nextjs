@@ -1,8 +1,14 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import { signOut } from 'firebase/auth';
 const Navbar = () => {
     const router = useRouter()
+    const path = router.asPath;
+    const [user, loading, error] = useAuthState(auth);
+
     return (
         <div>
             <div className="navbar justify-between pr-4 pl-4 bg-primary text-white">
@@ -33,7 +39,7 @@ const Navbar = () => {
                         onClick={() => router.replace('/')}
                         className="btn btn-ghost normal-case text-xl"
                     >
-                        daisyUI
+                       <img src="/logo.png" alt="" className='h-full p-1'/>
                     </button>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -72,32 +78,46 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="dropdown dropdown-end">
-                        <label
-                            onClick={() => router.replace('/login')}
-                            className="btn btn-ghost btn-circle avatar ring ring-primary ring-offset-base-100 ring-offset-2"
-                        >
-                            <div className="w-10 rounded-full">
-                                <img src="/icon/svg/loginAvata.svg" />
-                            </div>
-                        </label>
-                        <label
-                            tabIndex="0"
-                            className="btn btn-ghost btn-circle avatar ring ring-primary ring-offset-base-100 ring-offset-2"
-                        >
-                            <div className="w-10 rounded-full">
-                                <img src="/icon/svg/loginAvata.svg" />
-                            </div>
-                        </label>
-                        <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black">
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </a>
-                            </li>
-                            <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
-                        </ul>
+
+
+                        {
+                            user ?
+                                <>
+                                    <label
+                                        tabIndex='0'
+                                        className="btn btn-ghost btn-circle avatar ring ring-primary ring-offset-base-100 ring-offset-2"
+                                    >
+                                        <div className="w-10 rounded-full">
+                                            <img src={user?.photoURL} />
+                                        </div>
+                                    </label>
+                                    <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black">
+                                        <li>
+                                            <a className="justify-between">
+                                                Profile
+                                                <span className="badge">New</span>
+                                            </a>
+                                        </li>
+                                        <li><a>Settings</a></li>
+                                        <li onClick={() => signOut(auth)}>
+                                            <a>
+                                                Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </>
+                                :
+                                <label
+                                    onClick={() => {
+                                        router.replace('/login?return_url=' + path)
+                                    }}
+                                    className="btn btn-ghost btn-circle avatar ring ring-primary ring-offset-base-100 ring-offset-2"
+                                >
+                                    <div className="w-10 rounded-full">
+                                        <img src="/icon/svg/loginAvata.svg" />
+                                    </div>
+                                </label>
+                        }
                     </div>
                 </div>
             </div>
