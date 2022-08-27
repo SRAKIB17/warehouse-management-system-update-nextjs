@@ -20,7 +20,7 @@ const SpecificDescription = ({ product }) => {
                         <span>
                             {/* Last Update: {getTimeSince} */}
                         </span>
-                        <span className='flex items-center text-xl'>
+                        <span className='flex items-center '>
                             Supplier:
                             <p className='pl-2 text-primary'>
                                 {supplierName}

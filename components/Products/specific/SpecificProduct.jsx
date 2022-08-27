@@ -6,10 +6,10 @@ const SpecificProduct = ({ product }) => {
     const { DiscountPrice, category, rating, details, imageUrl, supplierName, price, title, quantity, _id } = product;
     return (
         <div className='flex flex-col gap-4'>
-            <figure className='productShadow rounded-md'>
+            <figure className='productShadow rounded-md '>
                 <img
                     src={imageUrl} alt="Shoes"
-                    className='sm:max-w-sm md:max-w-md rounded-md lg:max-w-lg h-auto w-full servicesComponent'
+                    className='md:max-w-md lg:max-w-full rounded-md lg:max-w-lg h-auto w-full servicesComponent'
                 />
             </figure>
             {/* *******CARD BODY ********* */}

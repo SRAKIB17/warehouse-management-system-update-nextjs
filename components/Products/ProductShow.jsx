@@ -15,13 +15,13 @@ const ProductShow = ({ props }) => {
 
     CheckAdmin()
     return (
-        <div>
-            <div className={styles.productShadow + " card bg-base-100 servicesComponent h-full"}>
+        <div className='productBg'>
+            <div className={styles.productShadow + " card servicesComponent h-full"}>
                 <div className='card-body p-0 relative'>
                     <div>
                         <div>
                             <figure className='p-4 '>
-                                <img src={imageUrl} alt="Shoes" className='w-full rounded-md h-[300px] sm:h-64 md:h-56' />
+                                <img src={imageUrl} alt="Shoes" className='w-full rounded-md h-56    sm:h-[11rem]' />
                             </figure>
                             {/* *******CARD BODY ********* */}
                             <div className='pl-6 pr-6 pb-4 pt-6 flex flex-col gap-1'>
@@ -85,21 +85,21 @@ const ProductShow = ({ props }) => {
                         {/* ***********DESCRIPTION*********** */}
                         {/* <CourseDescription course={props} /> */}
                     </div>
-                    <div className='h-[60px]'></div>
+                    <div className='h-[40px]'></div>
                     <div className=' absolute bottom-0 flex justify-between gap-1 p-4 w-full'>
-                        {/* <button className='btn btn-info text-white btn-sm flex gap-1' onClick={() => router.replace('/products/inventory/' + _id)}>
-                                Manage Item
-                                <Arrow_next_arrows_right_move size='20' color='currentColor' />
-                            </button> */}
-                        <button className=' btn-info sm:btn-md btn-sm text-white btn flex gap-1' onClick={() => router.replace('/products/' + _id)}>
-                            buy now  <Arrow_next_arrows_right_move size='20' color='currentColor' />
+                        <button className='btn btn-info text-white btn-sm flex gap-1' onClick={() => router.replace('/products/inventory/' + _id)}>
+                            Manage Item
+                            <Arrow_next_arrows_right_move size='20' color='currentColor' />
                         </button>
+                        {/* <button className=' btn-info  btn-sm text-white btn flex gap-1' onClick={() => router.replace('/products/' + _id)}>
+                            buy now  <Arrow_next_arrows_right_move size='20' color='currentColor' />
+                        </button> */}
 
-                        <button className='btn btn-info sm:btn-md btn-sm text-white  flex gap-1'>
+                        <button className='btn btn-info  btn-sm text-white  flex gap-1'>
                             <Cart size='20' color='currentColor' /> Add
                         </button>
 
-                        <button className='btn btn-info sm:btn-md btn-sm text-white flex gap-1'>
+                        <button className='btn btn-info  btn-sm text-white flex gap-1'>
                             <Love_favorite_fitness_heart_favourite_hearth_like_valentine size='20' color='currentColor' />
                         </button>
                     </div>

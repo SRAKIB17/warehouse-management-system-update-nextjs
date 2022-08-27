@@ -15,7 +15,7 @@ const Rating = ({ rating }) => {
                 disabled="true"
                 type="radio"
                 name="rating-3"
-                className={"mask mask-star-2 " + bgRating[1]}
+                className={"mask mask-star-2  " + bgRating[1]}
 
                 checked
             />

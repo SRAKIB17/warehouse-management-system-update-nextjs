@@ -65,17 +65,17 @@ const Products = () => {
     return (
         <div>
             <div className='mt-9 border-b-4 w-fit mx-auto border-primary rounded-md'>
-                <h1 className='text-[25px] sm:text-3xl font-extrabold text-center'>
+                <h1 className='text-[25px] sm:text-3xl font-extrabold text-center text-gray-600'>
                     Most Popular
 
                 </h1>
-                <h6 className='text-lg font-bold text-center'>
+                <h6 className='text-lg font-bold text-center text-gray-500'>
                     Trending Inventories
                 </h6>
             </div>
 
             <div
-                className='m-4 md:mr-4  md:ml-4 xl:mr-40 xl:ml-40'>
+                className='m-4 md:mr-4  md:ml-4 xl:mr-28 xl:ml-28'>
 
 
                 {
@@ -113,7 +113,7 @@ const Products = () => {
                                             type="number"
                                             min='1'
                                             name='pageJump'
-                                            max={lastPage}
+                                            max={eval(lastPage)}
                                             className="input input-xs  sm:input-sm input-info w-16"
                                             defaultValue={getPage}
                                         />
