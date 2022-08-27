@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import Rating from '../rating';
+import axios from 'axios'
 
-const ManageSpecificDescription = ({ product }) => {
+const ManageSpecificDescription = ({ product, refetch }) => {
     const { DiscountPrice, category, rating, details, imageUrl, supplierName, price, title, quantity, _id, htmlDescription } = product;
 
     const router = useRouter();
@@ -10,8 +11,41 @@ const ManageSpecificDescription = ({ product }) => {
     const deliverItemHandle = (e) => {
 
     }
+    const [quantityLast, setLastQuantity] = useState(eval(quantity))
+    const [loading, setLoading] = useState(null)
+    const restockItemHandle = async (e, method) => {
+        setLoading(true)
+        let quantity = 0
+        switch (method) {
+            case "deliver":
+                if ('deliver' && quantityLast > 0) {
+                    quantity = eval(e.target.deliverQuantity.value - 1)
+                }
 
-    const restockItemHandle = (e) => {
+                else {
+                    alert("stock out. could not update it")
+                }
+                break;
+
+            case "restock":
+                quantity = e.target.itemNumber.value;
+                break;
+            default:
+                break;
+        }
+
+        setLastQuantity(quantity)
+        const quantityBody = {
+            quantity: quantity
+        }
+        const { data } = await axios.put('/api/products/' + _id, quantityBody)
+        if (data?.acknowledged) {
+            e.target.reset()
+            setLoading(null)
+            refetch()
+        }
+        refetch()
+        setLoading(null)
 
     }
 
@@ -84,26 +118,65 @@ const ManageSpecificDescription = ({ product }) => {
                 </div>
                 <div>
                     <div className='flex gap-3'>
-                        <button className='btn btn-sm sm:btn-md text-white btn-success '>
-                            Delivered
-                        </button>
+                        <form
+                            className='flex items-center gap-1'
+                            onSubmit={(e) => {
+                                e.preventDefault()
+                                restockItemHandle(e, 'deliver')
+                                e.target.v
+
+                            }}>
+                            <input
+                                type="number"
+                                name='deliverQuantity'
+                                required
+                                min='0'
+                                value={(quantityLast)}
+                                className='w-20 sm:input-md input input-primary input-sm hidden'
+                            />
+                            {
+                                loading ?
+                                    <span className='btn btn-disabled bg-secondary btn-sm text-white btn-secondary sm:btn-md relative'>
+                                        Delivered
+                                        <p className='border-b-[3px] border-t-[3px]  absolute animate-spin w-5 rounded-full h-5'>
+
+                                        </p>
+                                    </span>
+                                    :
+                                    <button className='btn btn-sm sm:btn-md text-white btn-secondary '>
+                                        Delivered
+                                    </button>
+                            }
+                        </form>
+
 
                         <div>
                             <form
                                 className='flex items-center gap-1'
                                 onSubmit={(e) => {
                                     e.preventDefault()
-                                    restockItemHandle()
-
+                                    restockItemHandle(e, "restock")
                                 }}>
                                 <input
                                     type="number"
                                     name='itemNumber'
+                                    required
+                                    min='1'
                                     className='w-20 sm:input-md input input-primary input-sm'
                                 />
-                                <button className='btn btn-sm text-white btn-primary sm:btn-md '>
-                                    Restock
-                                </button>
+                                {
+                                    loading ?
+                                        <span className='btn btn-disabled bg-primary btn-sm text-white btn-primary sm:btn-md relative'>
+                                            Restock
+                                            <p className='border-b-[3px] border-t-[3px]  absolute animate-spin w-5 rounded-full h-5'>
+
+                                            </p>
+                                        </span>
+                                        :
+                                        <button className='btn btn-sm text-white btn-primary sm:btn-md '>
+                                            Restock
+                                        </button>
+                                }
                             </form>
                         </div>
                     </div>

@@ -69,14 +69,14 @@ const Register = () => {
                         type='text'
                         style={{ backgroundImage: `url('/icon/svg/login/name.svg')`, backgroundRepeat: 'no-repeat', backgroundSize: "20px 20px", backgroundPosition: ' 2% 50%' }}
                         placeholder="name"
-                        className="input input-accent input-sm sm:input-md rounded-3xl"
+                        className="input input-accent input-sm sm:input-md rounded-3xl loginReg"
                         {...register("name", { required: true, maxLength: 20 })}
                     />
                     <input
                         type='email'
                         style={{ backgroundImage: `url('/icon/svg/login/email.svg')`, backgroundRepeat: 'no-repeat', backgroundSize: "20px 20px", backgroundPosition: ' 2% 50%' }}
 
-                        className="input input-accent input-sm sm:input-md rounded-3xl"
+                        className="input input-accent input-sm sm:input-md rounded-3xl loginReg"
                         placeholder="email"
                         {...register("email", { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i })}
                         required
@@ -85,7 +85,7 @@ const Register = () => {
                     <input
                         placeholder="password"
                         style={{ backgroundImage: `url('/icon/svg/login/pass.svg')`, backgroundRepeat: 'no-repeat', backgroundSize: "20px 20px", backgroundPosition: ' 2% 50%' }}
-                        className="input input-accent input-sm sm:input-md rounded-3xl"
+                        className="input input-accent input-sm sm:input-md rounded-3xl loginReg"
                         type="password" {...register("password", { min: 6, max: 16 })}
                         required
                     />

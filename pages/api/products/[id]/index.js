@@ -7,8 +7,24 @@ export default async function handler(req, res) {
     const ItemCollection = client.db("ItemManage").collection('Item')
     const { id } = req.query;
     const filter = { _id: ObjectId(id) }
-    console.log(id)
+    const method = req.method;
+    console.log(method)
+    switch (method) {
+        case "GET":
+            const product = await ItemCollection.findOne(filter)
+            return res.status(200).json(product);
+            break;
 
-    const product = await ItemCollection.findOne(filter)
-    res.status(200).json(product)
+        case "PUT":
+            const body = req.body;
+            const updateDoc = {
+                $set: body
+            }
+            const result = await ItemCollection.updateOne(filter, updateDoc)
+            return res.send(result);
+            break;
+
+        default:
+            break;
+    }
 }

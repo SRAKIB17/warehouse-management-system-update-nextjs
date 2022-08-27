@@ -10,7 +10,7 @@ import Loading from '../../../components/Common/Loading';
 const Index = () => {
     const router = useRouter()
     const { id } = router.query;
-    const { data, isLoading } = useQuery(['buy', id], () => axios.get('/api/products/' + id))
+    const { data, isLoading, refetch } = useQuery(['buy', id], () => axios.get('/api/products/' + id))
     const product = data?.data
 
     return (
@@ -26,7 +26,7 @@ const Index = () => {
                                     <SpecificProduct product={product} />
                                 </div>
                                 <div className='w-full md:w-[50%]'>
-                                    <ManageSpecificDescription product={product} />
+                                    <ManageSpecificDescription product={product} refetch={refetch} />
                                 </div>
                             </div>
                         </div>
