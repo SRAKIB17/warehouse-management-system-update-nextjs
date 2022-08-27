@@ -91,6 +91,12 @@ const CommonBanner = () => {
                         />
 
                     </div>
+                    <div className='carousel-image'>
+                        <img
+                            src="/carousel/carousel4.png" alt=""
+                        />
+
+                    </div>
                 </div>
                 <div className="next-prev">
                     <button href="#" id="prev"></button>
