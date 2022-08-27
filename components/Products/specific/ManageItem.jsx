@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import Rating from '../rating';
+import Rating from '../Rating';
 import axios from 'axios'
 
 const ManageSpecificDescription = ({ product, refetch }) => {
@@ -8,9 +8,7 @@ const ManageSpecificDescription = ({ product, refetch }) => {
 
     const router = useRouter();
 
-    const deliverItemHandle = (e) => {
-
-    }
+ 
     const [quantityLast, setLastQuantity] = useState(eval(quantity))
     const [loading, setLoading] = useState(null)
     const restockItemHandle = async (e, method) => {

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import Rating from '../rating';
+import Rating from '../Rating';
 
 const SpecificDescription = ({ product }) => {
     const { DiscountPrice, category, rating, details, imageUrl, supplierName, price, title, quantity, _id, htmlDescription ,min_order_quantity } = product;

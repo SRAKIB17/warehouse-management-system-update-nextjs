@@ -5,7 +5,7 @@ import Cart from '../LogoSvg/Cart';
 import Love_favorite_fitness_heart_favourite_hearth_like_valentine from '../LogoSvg/Love_favorite_fitness_heart_favourite_hearth_like_valentine';
 import styles from './product.module.css'
 import { useRouter } from 'next/router';
-import Rating from './rating';
+import Rating from './Rating';
 import CheckAdmin from '../hooks/client/checkAdmin';
 
 const ProductShow = ({ props }) => {

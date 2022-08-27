@@ -46,7 +46,7 @@ const Navbar = () => {
                     
                             {
                                 !user &&
-                                <li className='text-white'>
+                                <li className='text-black'>
                                     <button onClick={() => {
                                         router.replace('/login?return_url=' + path)
                                     }}>

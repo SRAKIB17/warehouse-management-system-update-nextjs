@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import Rating from '../rating';
+import Rating from '../Rating';
 
 const SpecificProduct = ({ product }) => {
     const { DiscountPrice, category, rating, details, imageUrl, supplierName, price, title, quantity, _id } = product;
