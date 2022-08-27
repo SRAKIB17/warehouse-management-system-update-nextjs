@@ -43,7 +43,7 @@ const Navbar = () => {
                                     Blog
                                 </button>
                             </li>
-                    
+
                             {
                                 !user &&
                                 <li className='text-black'>
@@ -51,6 +51,16 @@ const Navbar = () => {
                                         router.replace('/login?return_url=' + path)
                                     }}>
                                         Login
+                                    </button>
+                                </li>
+                            }
+                            {
+                                !user ||
+                                <li className='text-black'>
+                                    <button onClick={() => {
+                                        router.replace('/products/manage')
+                                    }}>
+                                        Manages Product
                                     </button>
                                 </li>
                             }
@@ -75,7 +85,7 @@ const Navbar = () => {
                                 Blog
                             </button>
                         </li>
-                  
+
                         {
                             !user &&
                             <li className='text-white'>
@@ -83,6 +93,16 @@ const Navbar = () => {
                                     router.replace('/login?return_url=' + path)
                                 }}>
                                     Login
+                                </button>
+                            </li>
+                        }
+                        {
+                            !user ||
+                            <li className='text-white'>
+                                <button onClick={() => {
+                                    router.replace('/products/manage')
+                                }}>
+                                    Manages Product
                                 </button>
                             </li>
                         }
