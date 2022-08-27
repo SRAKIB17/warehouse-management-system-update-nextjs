@@ -30,7 +30,7 @@ const Banner = () => {
                             Fresh Grocries
                         </h1>
                         <span className='text-justify'>
-                            The center of the store is typically called the Grocery department and while it doesn't always make up the largest percentage of a store's sales, it is the largest department in the store.
+                            The center of the store is typically called the Grocery department and while it does not always make up the largest percentage of a store{"'"}s sales, it is the largest department in the store.
                         </span>
                         <button className='btn btn-primary w-fit sm:btn-md btn-xs mt-5 font-extralight btn-outline'>
                             Products
