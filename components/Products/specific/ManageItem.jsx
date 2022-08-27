@@ -101,7 +101,7 @@ const ManageSpecificDescription = ({ product, refetch }) => {
                                 </span>
                                 :
                                 <span className='text-primary'>
-                                    {" " + quantity}
+                                    {" " + quantityLast}
                                 </span>
                         }
 

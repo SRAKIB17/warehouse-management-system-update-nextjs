@@ -13,7 +13,12 @@ const ProductShow = ({ props }) => {
     // const getTimeSince = timeSince(time);
     const router = useRouter()
 
-    CheckAdmin()
+    CheckAdmin();
+    let ratingCheck = 0
+    if (Boolean(eval(rating))) {
+        ratingCheck = rating;
+    }
+    console.log(rating)
     return (
         <div className='productBg'>
             <div className={styles.productShadow + " card servicesComponent h-full"}>
@@ -58,7 +63,7 @@ const ProductShow = ({ props }) => {
 
                                 </span>
                                 <div>
-                                    <Rating rating={rating} />
+                                    <Rating rating={ratingCheck} />
                                 </div>
                                 <div className='text-xl flex gap-3 font-bold text-orange-500'>
                                     Price:
