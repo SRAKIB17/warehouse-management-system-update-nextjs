@@ -14,35 +14,41 @@ export default async function handler(req, res) {
     const nextLimit = eval(page * show)
     const { email } = req.query;
     const { user_id } = req.query;
-  
 
-    if (search == "undefined" || !search) {
-        const db = await ItemCollection.find({ userId: user_id }).skip(prevSkip).limit(nextLimit).toArray();
-        const count = await ItemCollection.countDocuments({});
-        return res.status(200).json({ result: db, count: count })
+    console.log(user_id);
+    if (user_id === 'undefined') {
+
     }
-
     else {
-        const regExp = new RegExp(search, 'i');
-        const filter = {
-            "$and": [
-                { userId: user_id },
-                {
-                    "$or": [
-                        { title: { $regex: regExp } },
-                        { category: { $regex: regExp } },
-                        { category: { $regex: regExp } },
-                        { supplierName: { $regex: regExp } },
-                        { details: { $regex: regExp } },
-                    ]
-                }
-            ]
+        if (search == "undefined" || !search) {
+            const db = await ItemCollection.find({ userId: user_id }).skip(prevSkip).limit(nextLimit).toArray();
+            const count = await ItemCollection.countDocuments({});
+            return res.status(200).json({ result: db, count: count })
         }
 
-        const db = await ItemCollection.find(filter).skip(prevSkip).limit(nextLimit).toArray();
-        const count = await ItemCollection.countDocuments(filter);
+        else {
+            const regExp = new RegExp(search, 'i');
+            const filter = {
+                "$and": [
+                    { userId: user_id },
+                    {
+                        "$or": [
+                            { title: { $regex: regExp } },
+                            { category: { $regex: regExp } },
+                            { category: { $regex: regExp } },
+                            { supplierName: { $regex: regExp } },
+                            { details: { $regex: regExp } },
+                        ]
+                    }
+                ]
+            }
 
-        return res.status(200).json({ result: db, count: count })
+            const db = await ItemCollection.find(filter).skip(prevSkip).limit(nextLimit).toArray();
+            const count = await ItemCollection.countDocuments(filter);
+
+            return res.status(200).json({ result: db, count: count })
+        }
     }
+
     res.status(200).json("ItemCollection")
 }

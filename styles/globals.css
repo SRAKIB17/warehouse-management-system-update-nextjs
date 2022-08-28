@@ -39,6 +39,8 @@ a {
 }
 
 *::-webkit-scrollbar {
+  height: 10px;
+  z-index: 1;
   width: 10px;
 }
 
@@ -197,4 +199,78 @@ a {
     margin-right: 7rem;
     margin-left: 7rem;
   }
+}
+
+
+
+
+
+
+
+/* *****************EDIT ITEM************************** */
+:root {
+  --bg-text-color: #0081FE;
+}
+
+.addItem h2 {
+  text-align: center;
+}
+
+.addItem {
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.addItem form {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.addItem input[type=text] {
+  width: 100%;
+  background-color: aliceblue;
+  border: none;
+  height: 40px;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.addItem input[type=text]::placeholder {
+  color: var(--bg-text-color);
+}
+
+/* .addItem input[type=submit] {
+  border: none;
+  height: 40px;
+  font-size: 20px;
+  background-color: var(--bg-text-color);
+  color: white;
+  border-radius: 5px;
+}
+
+.addItem input[type=submit]:hover {
+  background-color: #b3e12b;
+} */
+
+.addItem input:focus {
+  outline: none;
+}
+
+.addItem form div {
+  padding: 10px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 5px;
+  background-color: aliceblue;
+  display: flex;
+  align-items: center;
+}
+
+.addItem img {
+  padding: 5px;
+  width: 30px;
+  height: 30px;
 }
