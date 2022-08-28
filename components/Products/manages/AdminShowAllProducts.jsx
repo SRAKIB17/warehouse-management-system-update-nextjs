@@ -11,7 +11,7 @@ import Edit_64x64 from '../../LogoSvg/Edit_64x64';
 import DeleteProduct from './DeleteProduct';
 import EditProductModal from './EditProductModal';
 
-const UserProducts = () => {
+const AdminAllShowProduct = () => {
     const router = useRouter()
     const { page, showP, search } = router?.query || ' '
     const [getPage, setPage] = useState(1);
@@ -140,7 +140,7 @@ const UserProducts = () => {
     );
 };
 
-export default UserProducts;
+export default AdminAllShowProduct;
 
 
 

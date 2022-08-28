@@ -6,10 +6,10 @@ export default async function handler(req, res) {
     const { client } = await getClient()
     const ItemCollection = client.db("ItemManage").collection('Item')
     const { id } = req.query;
-    
+
     const filter = { _id: ObjectId(id) }
     const method = req.method;
-    
+
     switch (method) {
         case "GET":
             const product = await ItemCollection.findOne(filter)
@@ -18,13 +18,18 @@ export default async function handler(req, res) {
 
         case "PUT":
             const body = req.body;
-       
+
 
             const updateDoc = {
                 $set: body
             }
             const result = await ItemCollection.updateOne(filter, updateDoc)
             return res.send(result);
+            break;
+        case "DELETE":
+
+            const deleteResult = await ItemCollection.deleteOne(filter)
+            return res.send(deleteResult);
             break;
 
         default:

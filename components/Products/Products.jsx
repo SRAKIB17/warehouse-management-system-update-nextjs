@@ -22,7 +22,7 @@ const Products = () => {
     const count = data?.data?.count
     const products = data?.data?.result
 
-
+    console.log(products)
 
     useEffect(() => {
         if (page) {

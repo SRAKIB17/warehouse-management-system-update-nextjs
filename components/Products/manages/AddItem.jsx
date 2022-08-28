@@ -3,19 +3,16 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
+import { useRouter } from 'next/router';
 
 
 
 
-const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
+const AddItem = () => {
     const [user] = useAuthState(auth);
+    const router = useRouter()
 
-    const [item, setItem] = useState(editProduct);
-    useEffect(() => {
-        setItem(editProduct)
-    }, [editProduct])
     const onKeyUp = (event) => {
-        setItem({})
     }
 
     const [loading, setLoading] = useState(null)
@@ -37,17 +34,12 @@ const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
         const Item = { userId, title, category, price, DiscountPrice, quantity, supplierName, imageUrl, details, min_order_quantity, htmlDescription }
 
         // console.log(Item)
-        const { data } = await axios.put('/api/products/' + editProduct?._id, Item)
-        setEditProduct(null);
-
+        const { data } = await axios.post('/api/products/add', Item)
         if (data?.acknowledged) {
-            refetch()
-            setEditProduct(null)
             event.target.reset()
+            router.replace('/products/manage')
             setLoading(null)
         }
-        setEditProduct(null);
-        refetch()
         setLoading(null)
 
 
@@ -55,16 +47,16 @@ const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
     return (
         <div className='addItem'>
 
-            <h2 className='text-primary text-xl'> Update Item</h2>
+            <h2 className='text-primary text-2xl p-3'> Add Product</h2>
             <form onSubmit={handleAddItem} onKeyUp={onKeyUp} className="gap-1">
                 <div>
                     <img src='/icon/edit/vegetables.png' alt="" />
-                    <input placeholder='Item Title' type="text" name="name" id="" value={item?.title} required />
+                    <input placeholder='Item Title' type="text" name="name" id="" required />
                 </div>
                 <div>
                     <img src='/icon/edit/vegetables.png' alt="" />
 
-                    <input placeholder='Category' type="text" name="category" id="" value={item?.category} list="category" required />
+                    <input placeholder='Category' type="text" name="category" id="" list="category" required />
 
                     <datalist id="category">
                         <option value="Fruits" />
@@ -108,12 +100,12 @@ const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
                 </div>
                 <div>
                     <img src='/icon/edit/courier.png' alt="" />
-                    <input placeholder='Supplier Name' type="text" value={item?.supplierName} name="supplierName" id="" required />
+                    <input placeholder='Supplier Name' type="text" name="supplierName" id="" required />
                 </div>
 
                 <div>
                     <img src='/icon/edit/image.svg' alt="" />
-                    <input placeholder='Image Url' type="text" value={item?.imageUrl} name="imageUrl" id="" required />
+                    <input placeholder='Image Url' type="text" name="imageUrl" id="" required />
                 </div>
 
                 <div>
@@ -121,7 +113,7 @@ const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
                     <textarea
                         placeholder='Details'
                         type="text"
-                        value={item?.details}
+
                         name="details" id=""
                         required
                         className='w-full'
@@ -133,7 +125,7 @@ const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
                         className='w-full'
                         placeholder='Description'
                         type="text"
-                        value={item?.htmlDescription}
+
                         name="htmlDescription"
                         id=""
                         required
@@ -143,14 +135,14 @@ const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
                 {
                     loading ?
                         <span className='btn btn-disabled bg-primary btn-sm text-white btn-primary sm:btn-md relative'>
-                            Update
+                            Add
                             <p className='border-b-[3px] border-t-[3px]  absolute animate-spin w-5 rounded-full h-5'>
 
                             </p>
                         </span>
                         :
                         <button className='btn btn-sm sm:btn-md text-white btn-primary '>
-                            Update
+                            Add
                         </button>
                 }
             </form>
@@ -158,4 +150,4 @@ const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
     );
 };
 
-export default EditProduct;
+export default AddItem;

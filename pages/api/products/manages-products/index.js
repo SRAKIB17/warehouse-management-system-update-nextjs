@@ -15,9 +15,31 @@ export default async function handler(req, res) {
     const { email } = req.query;
     const { user_id } = req.query;
 
-    console.log(user_id);
-    if (user_id === 'undefined') {
 
+    if (user_id === 'undefined') {
+        if (search == "undefined" || !search) {
+            const db = await ItemCollection.find({}).skip(prevSkip).limit(nextLimit).toArray();
+            const count = await ItemCollection.countDocuments({});
+            return res.status(200).json({ result: db, count: count })
+        }
+
+        else {
+            const regExp = new RegExp(search, 'i');
+            const filter = {
+                "$or": [
+                    { title: { $regex: regExp } },
+                    { category: { $regex: regExp } },
+                    { category: { $regex: regExp } },
+                    { supplierName: { $regex: regExp } },
+                    { details: { $regex: regExp } },
+                ]
+            }
+
+            const db = await ItemCollection.find(filter).skip(prevSkip).limit(nextLimit).toArray();
+            const count = await ItemCollection.countDocuments(filter);
+
+            return res.status(200).json({ result: db, count: count })
+        }
     }
     else {
         if (search == "undefined" || !search) {
