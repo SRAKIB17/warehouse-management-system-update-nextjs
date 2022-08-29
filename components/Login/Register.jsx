@@ -23,10 +23,9 @@ const Register = () => {
     const [loginLoading, setLoading] = useState(false)
     const onSubmit = async data => {
         setLoading(true)
-        data.roll = 'admin'
 
-        // await createUserWithEmailAndPassword(data?.email, data?.password);
-        // await updateProfile({ displayName: data.name })
+        await createUserWithEmailAndPassword(data?.email, data?.password);
+        await updateProfile({ displayName: data.name })
         axios.post('/api/user', data);
         reset()
         setLoading(null)

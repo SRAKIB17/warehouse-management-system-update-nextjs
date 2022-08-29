@@ -11,12 +11,13 @@ export default async function handler(req, res) {
             const userBody = req.body
             delete userBody.password;
             delete userBody.name
+            userBody.roll = 'user'
             await ItemCollection.insertOne(userBody);
         case "GET":
             const { email } = req.query;
 
             const filter = { email: email }
-          
+
             const result = await ItemCollection.findOne(filter)
             console.log(filter)
             return res.status(200).json(result)
