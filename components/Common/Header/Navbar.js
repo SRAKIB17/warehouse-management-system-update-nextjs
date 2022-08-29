@@ -39,7 +39,7 @@ const Navbar = () => {
                                 </button>
                             </li>
                             <li className='text-black'>
-                                <button onClick={() => router.replace('prog-learn.vercel.app/story')}>
+                                <button onClick={() => router.replace('http://prog-learn.vercel.app/story')}>
                                     Blog
                                 </button>
                             </li>
@@ -98,7 +98,7 @@ const Navbar = () => {
                             </button>
                         </li>
                         <li>
-                            <button onClick={() => router.replace('prog-learn.vercel.app/story')}>
+                            <button onClick={() => router.replace('http://prog-learn.vercel.app/story')}>
                                 Blog
                             </button>
                         </li>
