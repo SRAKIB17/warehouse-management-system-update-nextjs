@@ -6,6 +6,9 @@ import auth from '../../../firebase.init';
 import { signOut } from 'firebase/auth';
 import Head from 'next/head';
 import Loading from '../Loading';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import CheckAdmin from '../../hooks/client/checkAdmin';
 const Navbar = () => {
     const router = useRouter()
     const path = router.asPath;
@@ -18,6 +21,9 @@ const Navbar = () => {
         }
 
     }, [user])
+
+    // const { data } = useQuery('user', user.email, () => axios.get(`/api/user?email=rakibulssc5%40gmail.com`))
+    const { admin } = CheckAdmin()
     return (
         <div>
             <Head>
@@ -57,13 +63,16 @@ const Navbar = () => {
                             {
                                 !user ||
                                 <>
-                                    <li className='text-black'>
-                                        <button onClick={() => {
-                                            router.replace('/products/manage')
-                                        }}>
-                                            Manages Product
-                                        </button>
-                                    </li>
+                                    {
+                                        admin?.admin &&
+                                        <li className='text-black'>
+                                            <button onClick={() => {
+                                                router.replace('/products/manage')
+                                            }}>
+                                                Manages Product
+                                            </button>
+                                        </li>
+                                    }
                                     <li className='text-black'>
                                         <button onClick={() => {
                                             router.replace('/products/manage/my')
@@ -123,13 +132,16 @@ const Navbar = () => {
                                         My Product
                                     </button>
                                 </li>
-                                <li className='text-white'>
-                                    <button onClick={() => {
-                                        router.replace('/products/manage')
-                                    }}>
-                                        Manages Product
-                                    </button>
-                                </li>
+                                {
+                                    admin?.admin &&
+                                    <li className='text-white'>
+                                        <button onClick={() => {
+                                            router.replace('/products/manage')
+                                        }}>
+                                            Manages Product
+                                        </button>
+                                    </li>
+                                }
                                 <li className='text-white'>
                                     <button onClick={() => {
                                         router.replace('/products/add')
@@ -193,11 +205,7 @@ const Navbar = () => {
                                                 <span className="badge">New</span>
                                             </a>
                                         </li>
-                                        <li onClick={() => router.replace('/cart')}>
-                                            <a className="justify-between">
-                                                Cart
-                                            </a>
-                                        </li>
+                                   
                                         <li><a>Settings</a></li>
                                         <li onClick={() => signOut(auth)}>
                                             <a>

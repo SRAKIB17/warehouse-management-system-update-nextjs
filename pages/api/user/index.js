@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const { client } = await getClient()
     const ItemCollection = client.db("ItemManage").collection('allUser')
     const method = req.method
-    console.log(method)
+
     switch (method) {
         case "POST":
             const userBody = req.body
@@ -15,11 +15,10 @@ export default async function handler(req, res) {
             await ItemCollection.insertOne(userBody);
         case "GET":
             const { email } = req.query;
-
             const filter = { email: email }
 
             const result = await ItemCollection.findOne(filter)
-            console.log(filter)
+   
             return res.status(200).json(result)
             break;
         default:

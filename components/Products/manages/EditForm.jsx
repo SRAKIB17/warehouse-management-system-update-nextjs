@@ -88,15 +88,15 @@ const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
                 </div>
                 <div>
                     <img src='/icon/edit/price.svg' alt="" />
-                    <input placeholder='Price' type="number" name="price" value={item?.price} id="" required />
+                    <input placeholder='Price' type="number" name="price" value={item?.price} id="" required  min='0'/>
                 </div>
                 <div>
                     <img src='/icon/edit/price.svg' alt="" />
-                    <input placeholder='Discount Price' type="number" value={item?.DiscountPrice} name="DiscountPrice" id="" required />
+                    <input placeholder='Discount Price' type="number" min='0' value={item?.DiscountPrice} name="DiscountPrice" id="" required />
                 </div>
                 <div>
                     <img src='/icon/edit/add.svg' alt="" />
-                    <input placeholder='Quantity' type="number" value={item?.quantity} name="quantity" id="" required />
+                    <input placeholder='Quantity' type="number" min='0' value={item?.quantity} name="quantity" id="" required />
 
                 </div>
 

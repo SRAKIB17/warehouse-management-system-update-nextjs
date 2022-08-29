@@ -80,15 +80,15 @@ const AddItem = () => {
                 </div>
                 <div>
                     <img src='/icon/edit/price.svg' alt="" />
-                    <input placeholder='Price' type="number" name="price" id="" required />
+                    <input placeholder='Price' type="number" name="price" id="" required min='0'/>
                 </div>
                 <div>
                     <img src='/icon/edit/price.svg' alt="" />
-                    <input placeholder='Discount Price' type="number" name="DiscountPrice" id="" required />
+                    <input placeholder='Discount Price' type="number" name="DiscountPrice" id="" min='0'  required />
                 </div>
                 <div>
                     <img src='/icon/edit/add.svg' alt="" />
-                    <input placeholder='Quantity' type="number" name="quantity" id="" required />
+                    <input placeholder='Quantity' type="number" name="quantity" id="" required min='0'/>
 
                 </div>
 
