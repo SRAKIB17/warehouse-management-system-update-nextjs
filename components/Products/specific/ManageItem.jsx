@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Rating from '../Rating';
 import axios from 'axios'
 import Edit_64x64 from '../../LogoSvg/Edit_64x64';
+import QRCode from "react-qr-code";
 
 const ManageSpecificDescription = ({ product, refetch, setEditProduct }) => {
     const { DiscountPrice, category, rating, details, imageUrl, supplierName, price, title, quantity, _id, htmlDescription } = product;
@@ -48,149 +49,175 @@ const ManageSpecificDescription = ({ product, refetch, setEditProduct }) => {
 
     }
 
+    const url = `
+    ${window.location != 'undefined' && location.hostname ? location.href : ''}
+    `
+    const productInfo =
+        `
+    Product: ${title}
+    Discount Price: $${DiscountPrice}
+    Price: $${price}
+    Category: ${category}
+    Supplier: ${supplierName}
+    Rating: ${rating}
+    visit: ${url}
+    `
+
     return (
         <div>
-            <div className='p-4'>
-                <div className='p-4 pt-6'>
-                    <h2 className="font-bold relative">
-                        <p className='text-[21px] flex gap-1 items-start'>
-                            <span>
-                                {title}
-                            </span>
-                            <label
-                                htmlFor="editProductManage"
-                                className="btn btn-ghost btn-xs"
-                                onClick={() => setEditProduct({ ...product })}
-                            >
-                                <Edit_64x64 size='16' />
-                            </label>
-
-                        </p>
-
-                    </h2>
-                    <div className='text-[16px] text-gray-500 flex-col flex'>
-                        <span>
-                            {/* Last Update: {getTimeSince} */}
-                        </span>
-                        <span className='flex items-center'>
-                            Supplier:
-                            <p className='pl-2 text-primary'>
-                                {supplierName}
-                            </p>
-                        </span>
-                        <div>
-                            <Rating rating={rating} />
-                        </div>
-                    </div>
-                    <div className='text-xl flex gap-3 font-bold text-orange-400'>
-                        Price:
-                        {
-                            DiscountPrice &&
-                            <span>
-                                ${DiscountPrice}
-                            </span>
-                        }
-                        {
-                            price &&
-                            <span
-                                className={
-                                    ((DiscountPrice && price)) ? 'del_discount_price font-extralight text-gray-500 ' : ' '
-                                }
-                            >
-                                ${price}
-                            </span>
-                        }
-                    </div>
-                    <span className='text-sm text-gray-500'>
-                        Quantity:
-                        {
-                            !Boolean(eval(quantity)) ?
-                                <span className='text-red-500'>
-                                    {" "}  Stock Out
-                                </span>
-                                :
-                                <span className='text-primary'>
-                                    {" " + quantityLast}
-                                </span>
-                        }
-
-                    </span>
-                    <h1
-                        className='text-gray-500 cursor-pointer '
-                        onClick={() => router.replace('/products?cat=' + category)}
-                    >
-                        Category:
-                        <span className='link-primary link-hover'>
-                            {" " + category}
-                        </span>
-                    </h1>
-                </div>
+            <div className='p-4 flex gap-4 sm:flex-row flex-col'>
                 <div>
-                    <div className='flex gap-3'>
-                        <form
-                            className='flex items-center gap-1'
-                            onSubmit={(e) => {
-                                e.preventDefault()
-                                restockItemHandle(e, 'deliver')
-                                e.target.v
+                    <div className='p-4 pt-6'>
+                        <h2 className="font-bold relative">
+                            <p className='text-[21px] flex gap-1 items-start'>
+                                <span>
+                                    {title}
+                                </span>
+                                <label
+                                    htmlFor="editProductManage"
+                                    className="btn btn-ghost btn-xs"
+                                    onClick={() => setEditProduct({ ...product })}
+                                >
+                                    <Edit_64x64 size='16' />
+                                </label>
 
-                            }}>
-                            <input
-                                type="number"
-                                name='deliverQuantity'
-                                required
-                                min='0'
-                                value={(quantityLast)}
-                                className='w-20 sm:input-md input input-primary input-sm hidden'
-                            />
+                            </p>
+
+                        </h2>
+                        <div className='text-[16px] text-gray-500 flex-col flex'>
+                            <span>
+                                {/* Last Update: {getTimeSince} */}
+                            </span>
+                            <span className='flex items-center'>
+                                Supplier:
+                                <p className='pl-2 text-primary'>
+                                    {supplierName}
+                                </p>
+                            </span>
+                            <div>
+                                <Rating rating={rating} />
+                            </div>
+                        </div>
+                        <div className='text-xl flex gap-3 font-bold text-orange-400'>
+                            Price:
                             {
-                                loading ?
-                                    <span className='btn btn-disabled bg-secondary btn-sm text-white btn-secondary sm:btn-md relative'>
-                                        Delivered
-                                        <p className='border-b-[3px] border-t-[3px]  absolute animate-spin w-5 rounded-full h-5'>
-
-                                        </p>
+                                DiscountPrice &&
+                                <span>
+                                    ${DiscountPrice}
+                                </span>
+                            }
+                            {
+                                price &&
+                                <span
+                                    className={
+                                        ((DiscountPrice && price)) ? 'del_discount_price font-extralight text-gray-500 ' : ' '
+                                    }
+                                >
+                                    ${price}
+                                </span>
+                            }
+                        </div>
+                        <span className='text-sm text-gray-500'>
+                            Quantity:
+                            {
+                                !Boolean(eval(quantity)) ?
+                                    <span className='text-red-500'>
+                                        {" "}  Stock Out
                                     </span>
                                     :
-                                    <button className='btn btn-sm sm:btn-md text-white btn-secondary '>
-                                        Delivered
-                                    </button>
+                                    <span className='text-primary'>
+                                        {" " + quantityLast}
+                                    </span>
                             }
-                        </form>
 
-
-                        <div>
+                        </span>
+                        <h1
+                            className='text-gray-500 cursor-pointer '
+                            onClick={() => router.replace('/products?cat=' + category)}
+                        >
+                            Category:
+                            <span className='link-primary link-hover'>
+                                {" " + category}
+                            </span>
+                        </h1>
+                    </div>
+                    <div>
+                        <div className='flex gap-3'>
                             <form
                                 className='flex items-center gap-1'
                                 onSubmit={(e) => {
                                     e.preventDefault()
-                                    restockItemHandle(e, "restock")
+                                    restockItemHandle(e, 'deliver')
+                                    e.target.v
+
                                 }}>
                                 <input
                                     type="number"
-                                    name='itemNumber'
+                                    name='deliverQuantity'
                                     required
-                                    min='1'
-                                    className='w-20 sm:input-md input input-primary input-sm'
+                                    min='0'
+                                    value={(quantityLast)}
+                                    className='w-20 sm:input-md input input-primary input-sm hidden'
                                 />
                                 {
                                     loading ?
-                                        <span className='btn btn-disabled bg-primary btn-sm text-white btn-primary sm:btn-md relative'>
-                                            Restock
+                                        <span className='btn btn-disabled bg-secondary btn-sm text-white btn-secondary sm:btn-md relative'>
+                                            Delivered
                                             <p className='border-b-[3px] border-t-[3px]  absolute animate-spin w-5 rounded-full h-5'>
 
                                             </p>
                                         </span>
                                         :
-                                        <button className='btn btn-sm text-white btn-primary sm:btn-md '>
-                                            Restock
+                                        <button className='btn btn-sm sm:btn-md text-white btn-secondary '>
+                                            Delivered
                                         </button>
                                 }
                             </form>
+
+
+                            <div>
+                                <form
+                                    className='flex items-center gap-1'
+                                    onSubmit={(e) => {
+                                        e.preventDefault()
+                                        restockItemHandle(e, "restock")
+                                    }}>
+                                    <input
+                                        type="number"
+                                        name='itemNumber'
+                                        required
+                                        min='1'
+                                        className='w-20 sm:input-md input input-primary input-sm'
+                                    />
+                                    {
+                                        loading ?
+                                            <span className='btn btn-disabled bg-primary btn-sm text-white btn-primary sm:btn-md relative'>
+                                                Restock
+                                                <p className='border-b-[3px] border-t-[3px]  absolute animate-spin w-5 rounded-full h-5'>
+
+                                                </p>
+                                            </span>
+                                            :
+                                            <button className='btn btn-sm text-white btn-primary sm:btn-md '>
+                                                Restock
+                                            </button>
+                                    }
+                                </form>
+                            </div>
                         </div>
+
                     </div>
                 </div>
+                <div className='mx-auto mt-4'>
+                    <QRCode
+                        id='svg'
+                        size='200'
 
+                        value={productInfo}
+                        viewBox={`0 0 256 256`}
+                    />
+
+                </div>
             </div>
         </div>
     );

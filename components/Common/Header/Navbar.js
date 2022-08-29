@@ -68,7 +68,7 @@ const Navbar = () => {
                                         <button onClick={() => {
                                             router.replace('/products/manage/my')
                                         }}>
-                                            Manages My Product
+                                            My Product
                                         </button>
                                     </li>
 
@@ -120,7 +120,7 @@ const Navbar = () => {
                                     <button onClick={() => {
                                         router.replace('/products/manage/my')
                                     }}>
-                                        Manages My Product
+                                        My Product
                                     </button>
                                 </li>
                                 <li className='text-white'>

@@ -29,9 +29,8 @@ const AddItem = () => {
         const imageUrl = event.target.imageUrl.value;
         const details = event.target.details.value;
         const htmlDescription = event.target.htmlDescription.value;
-        const min_order_quantity = event.target.min_order_quantity.value;
         const userId = user?.uid;
-        const Item = { userId, title, category, price, DiscountPrice, quantity, supplierName, imageUrl, details, min_order_quantity, htmlDescription }
+        const Item = { userId, title, category, price, DiscountPrice, quantity, supplierName, imageUrl, details, htmlDescription }
 
         // console.log(Item)
         const { data } = await axios.post('/api/products/add', Item)
@@ -93,11 +92,7 @@ const AddItem = () => {
 
                 </div>
 
-                <div>
-                    <img src='/icon/edit/add.svg' alt="" />
-                    <input placeholder='Min order quantity' type="number" name="min_order_quantity" id="" required />
-
-                </div>
+         
                 <div>
                     <img src='/icon/edit/courier.png' alt="" />
                     <input placeholder='Supplier Name' type="text" name="supplierName" id="" required />

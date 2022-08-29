@@ -92,7 +92,7 @@ const ProductShow = ({ props }) => {
                     </div>
                     <div className='h-[40px]'></div>
                     <div className=' absolute bottom-0 flex justify-between gap-1 p-4 w-full'>
-                        <button className='btn btn-info text-white btn-sm flex gap-1' onClick={() => router.replace('/products/inventory/' + _id)}>
+                        <button className='btn btn-info w-full text-white btn-sm flex gap-1' onClick={() => router.replace('/products/inventory/' + _id)}>
                             Manage Item
                             <Arrow_next_arrows_right_move size='20' color='currentColor' />
                         </button>
@@ -100,13 +100,13 @@ const ProductShow = ({ props }) => {
                             buy now  <Arrow_next_arrows_right_move size='20' color='currentColor' />
                         </button> */}
 
-                        <button className='btn btn-info  btn-sm text-white  flex gap-1'>
+                        {/* <button className='btn btn-info  btn-sm text-white  flex gap-1'>
                             <Cart size='20' color='currentColor' /> Add
                         </button>
 
                         <button className='btn btn-info  btn-sm text-white flex gap-1'>
                             <Love_favorite_fitness_heart_favourite_hearth_like_valentine size='20' color='currentColor' />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>
