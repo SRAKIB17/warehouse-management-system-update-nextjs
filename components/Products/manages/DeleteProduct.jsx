@@ -6,14 +6,13 @@ const DeleteProduct = ({ deleteProduct: { deleteProduct, setDeleteProduct }, ref
 
     const deleteHandleProduct = async () => {
         setDeleteLoading(true)
-        const { data } = await axios.put('/api/products/' + deleteProduct?.id)
+        const { data } = await axios.delete('/api/products/' + deleteProduct?.id)
 
         if (data?.acknowledged) {
             refetch()
             setDeleteProduct(null)
             setDeleteLoading(null)
         }
-        setEditProduct(null);
         refetch()
         setDeleteLoading(null)
     }

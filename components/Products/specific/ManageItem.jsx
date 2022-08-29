@@ -2,13 +2,14 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import Rating from '../Rating';
 import axios from 'axios'
+import Edit_64x64 from '../../LogoSvg/Edit_64x64';
 
-const ManageSpecificDescription = ({ product, refetch }) => {
+const ManageSpecificDescription = ({ product, refetch, setEditProduct }) => {
     const { DiscountPrice, category, rating, details, imageUrl, supplierName, price, title, quantity, _id, htmlDescription } = product;
 
     const router = useRouter();
 
- 
+
     const [quantityLast, setLastQuantity] = useState(eval(quantity))
     const [loading, setLoading] = useState(null)
     const restockItemHandle = async (e, method) => {
@@ -52,8 +53,18 @@ const ManageSpecificDescription = ({ product, refetch }) => {
             <div className='p-4'>
                 <div className='p-4 pt-6'>
                     <h2 className="font-bold relative">
-                        <p className='text-[21px]'>
-                            {title}
+                        <p className='text-[21px] flex gap-1 items-start'>
+                            <span>
+                                {title}
+                            </span>
+                            <label
+                                htmlFor="editProductManage"
+                                className="btn btn-ghost btn-xs"
+                                onClick={() => setEditProduct({ ...product })}
+                            >
+                                <Edit_64x64 size='16' />
+                            </label>
+
                         </p>
 
                     </h2>

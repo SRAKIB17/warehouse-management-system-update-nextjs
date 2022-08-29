@@ -56,13 +56,30 @@ const Navbar = () => {
                             }
                             {
                                 !user ||
-                                <li className='text-black'>
-                                    <button onClick={() => {
-                                        router.replace('/products/manage')
-                                    }}>
-                                        Manages Product
-                                    </button>
-                                </li>
+                                <>
+                                    <li className='text-black'>
+                                        <button onClick={() => {
+                                            router.replace('/products/manage')
+                                        }}>
+                                            Manages Product
+                                        </button>
+                                    </li>
+                                    <li className='text-black'>
+                                        <button onClick={() => {
+                                            router.replace('/products/manage/my')
+                                        }}>
+                                            Manages My Product
+                                        </button>
+                                    </li>
+
+                                    <li className='text-black'>
+                                        <button onClick={() => {
+                                            router.replace('/products/add')
+                                        }}>
+                                            Add Product
+                                        </button>
+                                    </li>
+                                </>
                             }
                         </ul>
                     </div>
@@ -98,14 +115,31 @@ const Navbar = () => {
                         }
                         {
                             !user ||
-                            <li className='text-white'>
-                                <button onClick={() => {
-                                    router.replace('/products/manage')
-                                }}>
-                                    Manages Product
-                                </button>
-                            </li>
+                            <>
+                                <li className='text-white'>
+                                    <button onClick={() => {
+                                        router.replace('/products/manage/my')
+                                    }}>
+                                        Manages My Product
+                                    </button>
+                                </li>
+                                <li className='text-white'>
+                                    <button onClick={() => {
+                                        router.replace('/products/manage')
+                                    }}>
+                                        Manages Product
+                                    </button>
+                                </li>
+                                <li className='text-white'>
+                                    <button onClick={() => {
+                                        router.replace('/products/add')
+                                    }}>
+                                        Add Product
+                                    </button>
+                                </li>
+                            </>
                         }
+
                     </ul>
                 </div>
 

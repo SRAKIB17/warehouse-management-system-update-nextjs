@@ -121,7 +121,7 @@ const UserProducts = () => {
                                 editProduct &&
                                 <EditProductModal
                                     editProduct={editProduct}
-                                    setEditProduct={setDeleteProduct}
+                                    setEditProduct={setEditProduct}
                                     refetch={refetch}
                                 />
                             }

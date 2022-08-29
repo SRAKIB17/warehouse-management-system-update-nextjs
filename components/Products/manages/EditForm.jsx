@@ -9,8 +9,8 @@ import auth from '../../../firebase.init';
 
 const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
     const [user] = useAuthState(auth);
-
     const [item, setItem] = useState(editProduct);
+    console.log(item)
     useEffect(() => {
         setItem(editProduct)
     }, [editProduct])
@@ -89,21 +89,21 @@ const EditProduct = ({ editProduct, setEditProduct, refetch }) => {
                 </div>
                 <div>
                     <img src='/icon/edit/price.svg' alt="" />
-                    <input placeholder='Price' type="number" name="price" id="" required />
+                    <input placeholder='Price' type="number" name="price" value={item?.price} id="" required />
                 </div>
                 <div>
                     <img src='/icon/edit/price.svg' alt="" />
-                    <input placeholder='Discount Price' type="number" name="DiscountPrice" id="" required />
+                    <input placeholder='Discount Price' type="number" value={item?.DiscountPrice} name="DiscountPrice" id="" required />
                 </div>
                 <div>
                     <img src='/icon/edit/add.svg' alt="" />
-                    <input placeholder='Quantity' type="number" name="quantity" id="" required />
+                    <input placeholder='Quantity' type="number" value={item?.quantity} name="quantity" id="" required />
 
                 </div>
 
                 <div>
                     <img src='/icon/edit/add.svg' alt="" />
-                    <input placeholder='Min order quantity' type="number" name="min_order_quantity" id="" required />
+                    <input placeholder='Min order quantity' value={item?.min_order_quantity} type="number" name="min_order_quantity" id="" required />
 
                 </div>
                 <div>

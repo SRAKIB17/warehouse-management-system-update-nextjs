@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import Search_s from '../../components/LogoSvg/Search_s';
-import UserProducts from '../../components/Products/manages/UserProducts';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import Loading from '../../../components/Common/Loading';
+import Search_s from '../../../components/LogoSvg/Search_s';
+import UserProducts from '../../../components/Products/manages/UserProducts';
+import auth from '../../../firebase.init';
 
 const Index = () => {
     const router = useRouter();
@@ -17,6 +20,15 @@ const Index = () => {
     const searchProductHandle = e => {
         e.preventDefault()
         router.replace('?search=' + e.target.search.value)
+    }
+
+       
+    const [user, loading, error] = useAuthState(auth);
+    if (loading) {
+        return <Loading />
+    }
+    if (!user) {
+        router.replace('/login/?return_url=/products/manage')
     }
     return (
         <div className='m-4 md:mr-4  md:ml-4 xl:mr-28 xl:ml-28'>
@@ -36,6 +48,9 @@ const Index = () => {
                         <Search_s />
                     </button>
                 </form>
+                <button className='mt-4 btn btn-primary btn-outline btn-sm' onClick={()=>router?.replace('/products/add')}>
+                    Add Product
+                </button>
             </div>
             <UserProducts />
             

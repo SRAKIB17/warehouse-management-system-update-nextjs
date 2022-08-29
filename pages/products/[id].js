@@ -14,18 +14,13 @@ const Index = () => {
     const { data, isLoading } = useQuery(['buy', id], () => axios.get('/api/products/' + id))
     const product = data?.data
     const [user, loading, error] = useAuthState(auth);
-    const { return_url } = router.query
 
     if (loading) {
         return <Loading />
     }
-    if (user) {
-        if (return_url) {
-            router.replace(return_url)
-        }
-        else {
-            router.replace('/')
-        }
+
+    if (!user) {
+        router.replace('/login/?return_url=/products/' + id)
     }
     return (
         <div>

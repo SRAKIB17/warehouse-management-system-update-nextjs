@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
 import { useQuery } from 'react-query';
 // import Loading from '../Common/Loading';
@@ -7,11 +7,24 @@ import { useRouter } from 'next/router';
 import SpecificProduct from '../../../components/Products/specific/SpecificProduct';
 import ManageSpecificDescription from '../../../components/Products/specific/ManageItem';
 import Loading from '../../../components/Common/Loading';
+import auth from '../../../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import EditProductModal from '../../../components/Products/manages/EditProductModal';
 const Index = () => {
     const router = useRouter()
     const { id } = router.query;
     const { data, isLoading, refetch } = useQuery(['buy', id], () => axios.get('/api/products/' + id))
     const product = data?.data
+
+    const [editProduct, setEditProduct] = useState(null)
+
+    const [user, loading, error] = useAuthState(auth);
+    if (loading) {
+        return <Loading />
+    }
+    if (!user) {
+        router.replace('/login/?return_url=/products/inventory/' + id)
+    }
 
     return (
         <div>
@@ -26,13 +39,21 @@ const Index = () => {
                                     <SpecificProduct product={product} />
                                 </div>
                                 <div className='w-full md:w-[50%]'>
-                                    <ManageSpecificDescription product={product} refetch={refetch} />
+                                    <ManageSpecificDescription product={product} refetch={refetch} setEditProduct={setEditProduct}/>
                                 </div>
                             </div>
                         </div>
 
                 }
             </div>
+            {
+                editProduct &&
+                <EditProductModal
+                    editProduct={editProduct}
+                    setEditProduct={setEditProduct}
+                    refetch={refetch}
+                />
+            }
         </div>
     );
 };
