@@ -71,37 +71,39 @@ const UserProducts = () => {
                         </div>
                     </div>
                     :
-                    <div className='min-h-full'>
-                        <div>
-                            <Pagination
-                                lastPage={lastPage}
-                                page={getPage}
-                                pageHandle={pageHandle}
-                            />
-                        </div>
-                        <div className="overflow-auto w-full h-[30rem]">
-                            <table className="table w-full table-zebra">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                        </th>
-                                        <th>Product</th>
-                                        <th>Supplier</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        products?.map((product, index) =>
-                                            <ShowTable key={index} product={product} setDeleteProduct={setDeleteProduct}
-                                                setEditProduct={setEditProduct}
-                                            />
-                                        )
-                                    }
-                                </tbody>
-                                {/* <tfoot>
+                    products?.length ?
+                        <>
+                            <div className='min-h-full'>
+                                <div>
+                                    <Pagination
+                                        lastPage={lastPage}
+                                        page={getPage}
+                                        pageHandle={pageHandle}
+                                    />
+                                </div>
+                                <div className="overflow-auto w-full h-[30rem]">
+                                    <table className="table w-full table-zebra">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                </th>
+                                                <th>Product</th>
+                                                <th>Supplier</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                products?.map((product, index) =>
+                                                    <ShowTable key={index} product={product} setDeleteProduct={setDeleteProduct}
+                                                        setEditProduct={setEditProduct}
+                                                    />
+                                                )
+                                            }
+                                        </tbody>
+                                        {/* <tfoot>
                         <tr>
                             <th></th>
                             <th>Name</th>
@@ -110,30 +112,38 @@ const UserProducts = () => {
                             <th></th>
                         </tr>
                     </tfoot> */}
-                            </table>
-                            {
-                                deleteProduct &&
-                                <DeleteProduct refetch={refetch}
-                                    deleteProduct={{ deleteProduct, setDeleteProduct }}
-                                />
-                            }
-                            {
-                                editProduct &&
-                                <EditProductModal
-                                    editProduct={editProduct}
-                                    setEditProduct={setEditProduct}
-                                    refetch={refetch}
-                                />
-                            }
+                                    </table>
+                                    {
+                                        deleteProduct &&
+                                        <DeleteProduct refetch={refetch}
+                                            deleteProduct={{ deleteProduct, setDeleteProduct }}
+                                        />
+                                    }
+                                    {
+                                        editProduct &&
+                                        <EditProductModal
+                                            editProduct={editProduct}
+                                            setEditProduct={setEditProduct}
+                                            refetch={refetch}
+                                        />
+                                    }
+                                </div>
+                                <div>
+                                    <Pagination
+                                        lastPage={lastPage}
+                                        page={getPage}
+                                        pageHandle={pageHandle}
+                                    />
+                                </div>
+                            </div>
+                        </>
+                        :
+                        <div className='text-center text-gray-500 opacity-60 text-3xl mt-8'>
+                            <h1>
+                                No Product Found
+                            </h1>
                         </div>
-                        <div>
-                            <Pagination
-                                lastPage={lastPage}
-                                page={getPage}
-                                pageHandle={pageHandle}
-                            />
-                        </div>
-                    </div>
+
             }
 
         </div>
