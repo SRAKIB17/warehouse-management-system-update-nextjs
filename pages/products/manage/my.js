@@ -36,7 +36,7 @@ const Index = () => {
                 <div>
                     <h1 className='text-primary text-3xl font-extrabold text-center mb-4'>Manage Product</h1>
                 </div>
-                <form onSubmit={searchProductHandle} className='flex items-center'>
+                <form onSubmit={searchProductHandle} className='flex items-center'>``
                     <input
                         type="search"
                         className='input max-w-[200px] focus:outline-none input-primary input-sm rounded-l-md rounded-r-none'
