@@ -8,7 +8,7 @@ const queryClient = new QueryClient()
 function MyApp({ Component, pageProps }) {
 
 
-  return( <QueryClientProvider client={queryClient}>
+  return (<QueryClientProvider client={queryClient}>
     <div>
       <Navbar />
     </div>
@@ -24,3 +24,4 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
+

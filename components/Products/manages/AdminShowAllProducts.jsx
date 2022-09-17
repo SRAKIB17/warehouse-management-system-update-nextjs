@@ -20,7 +20,11 @@ const AdminAllShowProduct = () => {
 
     const [user, loading, error] = useAuthState(auth);
 
-    const { data, isLoading, refetch } = useQuery(['adminProduct', user, search, show, getPage], () => axios.get(`/api/products/manages-products?email=${user?.email}&search=${search}&show=${show}&page=${getPage}`))
+    const { data, isLoading, refetch } = useQuery(['adminProduct', user, search, show, getPage], () => axios.get(`/api/products/manages-products?email=${user?.email}&search=${search}&show=${show}&page=${getPage}`, {
+        headers: {
+            token: localStorage.getItem('token')
+        }
+    }))
 
     const count = data?.data?.count
     const products = data?.data?.result
